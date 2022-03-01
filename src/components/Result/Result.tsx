@@ -1,3 +1,4 @@
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
 import Capres1 from "../../assets/jokowi.png";
 import Capres2 from "../../assets/prabowo.png";
@@ -10,6 +11,7 @@ const ResultContainer = styled.div`
 const ResultTitleContainer = styled.div`
   text-align: center;
   margin-bottom: 3em;
+  color: hsl(165, 33%, 30%);
 `;
 
 const ResultTitle = styled.h1`
@@ -45,17 +47,55 @@ const NamaCapresContainer = styled.div`
   justify-content: space-evenly;
   margin-top: 2em;
   font-weight: 500;
+  color: hsl(165, 33%, 30%);
 `;
 
 const JumlahSuaraContainer = styled.div`
   text-align: center;
   margin-top: 1em;
+  color: hsl(165, 33%, 30%);
 `;
 
 const JumlahSuara = styled.p`
   font-size: 1.75rem;
   font-weight: 800;
 `;
+
+const data = [
+  { name: "Jokowi", value: 9737 },
+  { name: "Prabowo", value: 8265 },
+];
+
+const COLORS = ["hsl(169, 38%, 50%)", "hsl(169, 38%, 30%)"];
+const RADIAN = Math.PI / 180;
+
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}: any) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="#EEF7FF"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+      fontWeight="bold"
+      fontSize="1.5rem"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
 const Result = () => {
   return (
@@ -82,7 +122,29 @@ const Result = () => {
             </JumlahSuaraContainer>
           </div>
           {/* chart */}
-          <div></div>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart width={400} height={400}>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={120}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {data.map((entry, index) => {
+                  return (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  );
+                })}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
           {/* calon no.2 */}
           <div>
             <CapresImgContainer>
