@@ -9,6 +9,7 @@ const HeaderContainer = styled.div`
   top: 0;
   background-color: white;
   box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 10%);
+  z-index: 2;
 `;
 
 const ContentContainer = styled.div`
