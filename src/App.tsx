@@ -1,13 +1,16 @@
 import Header from "./components/Header/Header";
 import Result from "./components/Result/Result";
 import List from "./components/List/List";
+import TPSProvider from "./context/tpsContext";
 
 function App() {
   return (
     <>
-      <Header />
-      <Result />
-      <List />
+      <TPSProvider>
+        <Header />
+        <Result />
+        <List />
+      </TPSProvider>
     </>
   );
 }

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { TPSContext } from "../../context/tpsContext";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
@@ -34,16 +36,18 @@ const PemilihCard = styled(GridContainer)`
 `;
 
 const List = () => {
+  const { tps } = useContext(TPSContext);
+
   return (
     <>
       <ListContainer>
         <ListTitleContainer>
-          <ListTitle>Daftar Pemilih di TPS 01</ListTitle>
+          <ListTitle>Daftar Pemilih di TPS 0{tps}</ListTitle>
         </ListTitleContainer>
         <GridContainer>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005042604950001</p>
+            <p>210050426********</p>
             <p>Nama</p>
             <p>Beni Afrianto</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -51,7 +55,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005041208890983</p>
+            <p>210050412********</p>
             <p>Nama</p>
             <p>Edi Habibi</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -59,7 +63,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005041711928372</p>
+            <p>210050417********</p>
             <p>Nama</p>
             <p>Umar Nashiruddin</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -67,7 +71,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005040312849300</p>
+            <p>210050403********</p>
             <p>Nama</p>
             <p>Farah Wulandari</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -75,7 +79,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005042302679300</p>
+            <p>210050423********</p>
             <p>Nama</p>
             <p>Emong Waskita</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -83,7 +87,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005041009958037</p>
+            <p>210050410********</p>
             <p>Nama</p>
             <p>Mila Hasanah</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -91,7 +95,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005041212929078</p>
+            <p>210050412********</p>
             <p>Nama</p>
             <p>Lili Yuniar</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -99,7 +103,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005041507979832</p>
+            <p>210050415********</p>
             <p>Nama</p>
             <p>Ilsa Andriani</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -107,7 +111,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005042405751238</p>
+            <p>210050424********</p>
             <p>Nama</p>
             <p>Gasti Rahimah</p>
             <p>Tempat/Tanggal Lahir</p>
@@ -115,7 +119,7 @@ const List = () => {
           </PemilihCard>
           <PemilihCard>
             <p>NIK</p>
-            <p>21005042604950002</p>
+            <p>210050426********</p>
             <p>Nama</p>
             <p>Hadi Suwarno</p>
             <p>Tempat/Tanggal Lahir</p>

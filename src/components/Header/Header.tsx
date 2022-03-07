@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import Select from "react-select";
+import { TPSContext } from "../../context/tpsContext";
 
 import { optionTPS, optionKel, optionKec } from "./constant";
 
@@ -29,30 +31,45 @@ const SelectContainer = styled.div`
   gap: 1.5em;
 `;
 
+const SelectTitle = styled.p`
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+`;
+
 const Header = () => {
+  const { setSelectedTPS } = useContext(TPSContext);
+
   return (
     <HeaderContainer>
       <ContentContainer>
         <HeaderTitle>Pilih Lokasi</HeaderTitle>
         <SelectContainer>
-          {/*  */}
-          <Select
-            isSearchable={false}
-            options={optionKec}
-            defaultValue={optionKec[0]}
-          />
-          {/*  */}
-          <Select
-            isSearchable={false}
-            options={optionKel}
-            defaultValue={optionKel[0]}
-          />
+          <div>
+            <SelectTitle>Kecamatan</SelectTitle>
+            <Select
+              isSearchable={false}
+              options={optionKec}
+              defaultValue={optionKec[0]}
+            />
+          </div>
+          <div>
+            <SelectTitle>Kelurahan</SelectTitle>
+            <Select
+              isSearchable={false}
+              options={optionKel}
+              defaultValue={optionKel[0]}
+            />
+          </div>
           {/* TPS */}
-          <Select
-            isSearchable={false}
-            options={optionTPS}
-            defaultValue={optionTPS[0]}
-          />
+          <div>
+            <SelectTitle>TPS</SelectTitle>
+            <Select
+              isSearchable={false}
+              options={optionTPS}
+              defaultValue={optionTPS[0]}
+              onChange={(val) => val && setSelectedTPS(val.value)}
+            />
+          </div>
         </SelectContainer>
       </ContentContainer>
     </HeaderContainer>

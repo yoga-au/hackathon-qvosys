@@ -1,5 +1,8 @@
+import { useContext, useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
+import { TPSContext } from "../../context/tpsContext";
+import { voteData } from "./constant";
 import Capres1 from "../../assets/jokowi.png";
 import Capres2 from "../../assets/prabowo.png";
 
@@ -62,8 +65,8 @@ const JumlahSuara = styled.p`
 `;
 
 const data = [
-  { name: "Jokowi", value: 9737 },
-  { name: "Prabowo", value: 8265 },
+  { name: "Jokowi", value: 180 },
+  { name: "Prabowo", value: 61 },
 ];
 
 const COLORS = ["hsl(169, 38%, 50%)", "hsl(169, 38%, 30%)"];
@@ -97,12 +100,27 @@ const renderCustomizedLabel = ({
   );
 };
 
+type DataObj = {
+  name: string;
+  value: number;
+}[];
+
 const Result = () => {
+  const { tps } = useContext(TPSContext);
+  const [displayedData, setDisplayedData] = useState<DataObj | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    const findData = voteData.find((item) => item.id === tps);
+    setDisplayedData(findData?.result);
+  }, [tps]);
+
   return (
     <>
       <ResultContainer>
         <ResultTitleContainer>
-          <ResultTitle>Hasil Pemilu di TPS 01</ResultTitle>
+          <ResultTitle>Hasil Pemilu di TPS 0{tps}</ResultTitle>
           <ResultSubtitle>
             Terakhir update pada 17:30:00 23 Februari 2024
           </ResultSubtitle>
@@ -118,14 +136,19 @@ const Result = () => {
               <p>Ma'ruf Amin</p>
             </NamaCapresContainer>
             <JumlahSuaraContainer>
-              <JumlahSuara>9.737 Suara</JumlahSuara>
+              <JumlahSuara>
+                {displayedData &&
+                  displayedData.find((item) => item.name === "Jokowi")
+                    ?.value}{" "}
+                Suara
+              </JumlahSuara>
             </JumlahSuaraContainer>
           </div>
           {/* chart */}
           <ResponsiveContainer width="100%" height="100%">
             <PieChart width={400} height={400}>
               <Pie
-                data={data}
+                data={displayedData}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
@@ -155,7 +178,12 @@ const Result = () => {
               <p>Sandiaga Uno</p>
             </NamaCapresContainer>
             <JumlahSuaraContainer>
-              <JumlahSuara>8.265 Suara</JumlahSuara>
+              <JumlahSuara>
+                {displayedData &&
+                  displayedData.find((item) => item.name === "Prabowo")
+                    ?.value}{" "}
+                Suara
+              </JumlahSuara>
             </JumlahSuaraContainer>
           </div>
         </ChartContainer>
